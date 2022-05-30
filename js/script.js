@@ -42,6 +42,31 @@ allLinks.forEach(function (link) {
 });
 
 ///////////////////////////////////////////////////////////
+// Sticky
+const sectionHeroEl = document.querySelector('.section-hero');
+
+const obs = new IntersectionObserver(
+  function (entries) {
+    const ent = entries[0];
+
+    if (ent.isIntersecting === false) {
+      console.log(ent);
+      document.body.classList.add('sticky');
+    } else if (ent.isIntersecting) {
+      document.body.classList.remove('sticky');
+    }
+  },
+  {
+    // In the viewport
+    root: null,
+    // Fire an event as soon as 0% of hero section is inside viewport i.e. hero section is out of viewport
+    threshold: 0,
+    rootMargin: '-80px',
+  }
+);
+obs.observe(sectionHeroEl);
+
+///////////////////////////////////////////////////////////
 // Fixing flexbox gap property missing in some Safari versions
 function checkFlexGap() {
   var flex = document.createElement('div');
